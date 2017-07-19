@@ -1,0 +1,20 @@
+{
+  "name": "lightRoApp",
+  "version": "0.0.1",
+  "description": "Lightrotastic experiences ahead.",
+  "main": "index.js",
+  "scripts": {
+    "test": "'exit 1'",
+    "start": "node index.js"
+  },
+  "author": "robertnator",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "express-jade": "0.0.3",
+    "handlebars": "^4.0.10",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "node-json-db": "^0.7.3",
+  }
+}

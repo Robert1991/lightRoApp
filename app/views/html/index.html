@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>{{name}}</title>
+        <meta charset="utf-8">
+        <meta {{#each meta}}{{{this}}}{{/each}}>
+            {{#each stylesheet}}
+            <link rel="stylesheet" href="{{{this}}}"/>
+        <link rel="stylesheet" href="../../../node_modules/html-template/node_modules/hyperglue/node_modules/domify/components/visionmedia-mocha/mocha.css" type="text/css">
+
+        {{/each}}
+        {{#each jsspripts}}
+        <script type='text/javascript' src="{{{this}}}"></script>
+        {{/each}}
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h1>{{{heading}}}</h1></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configure Devices
+                                    <span class="caret"></span></button>
+                                <ul id="deviceListHead" onchange="refreshTable()" class="dropdown-menu">
+                                    {{{device_list devices}}}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Manage Devices
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a data-toggle="modal" href="#add_device_modal">Add Device</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <h2>Device Name</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Ip-Adress</th>
+                        <th>Port</th>
+                        <th>Connection-Status</th>
+                        <th>Configured Color</th>
+                    </tr>
+                </thead>
+                <tbody id="main_table_body">
+                    {{{device_info_table selected_devices}}}
+                </tbody>
+            </table>
+        </div>
+        <div class="container-fluid">
+            <h2 id="test">
+                Configure Color
+            </h2>
+            <div class="col-md-4">
+                <input class="jscolor {onFineChange:'update(this)'} form-control" value="cc66ff">
+
+            </div>
+            <div class="col-md-4">
+                <div id="colorRect" style="width:200px;height:20px;border:1px solid;"></div>
+            </div>
+        </div> 
+        <!-- Modal -->
+        <div class="modal fade" id="add_device_modal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="padding:35px 50px;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4><span class="glyphicon glyphicon-plus"></span>Add Device</h4>
+                    </div>
+                    <div id="testone" class="modal-body" style="padding:40px 50px;">
+                        <form id="addDeviceForm" class="form-horizontal" onsubmit="return submitSettings();">
+                            <fieldset>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="device_name">Device Name</label>  
+                                    <div class="col-md-4">
+                                        <input id="device_name" name="device_name" type="text" placeholder="" class="form-control input-md" required="">
+
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="device_location">Device Location</label>  
+                                    <div class="col-md-4">
+                                        <input id="device_location" name="device_location" type="text" placeholder="" class="form-control input-md">
+
+                                    </div>
+                                </div>
+                                
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="device_network_name_ip">Network Name / IP</label>  
+                                    <div class="col-md-4">
+                                        <input id="device_network_name_ip" name="device_network_name_ip" type="text" placeholder="" class="form-control input-md" required="">
+
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="device_port">Device Port</label>  
+                                    <div class="col-md-4">
+                                        <input id="device_port" name="device_port" type="text" placeholder="3000" class="form-control input-md" required="">
+
+                                    </div>
+                                </div>
+                                
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="submitButton">Submit Settings</label>
+                                    <div class="col-md-4">
+                                        <button id="submitButton" name="submitButton" class="btn btn-primary" type = "submit">Submit Settings</button>
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div> 
+            </div>
+            {{{local_script_import local_js}}}
+    </body>
+</html>

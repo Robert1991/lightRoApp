@@ -1,0 +1,12 @@
+{
+    "name": "lightRoApp",
+    "meta": ["name=\"viewport\"", "content=\"width=device-width\",initial-scale=1\""],
+    "stylesheet": ["https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"],
+    "jsspripts": ["https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js",
+        "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"],
+    "heading": "LightRoApp",
+    "devices": "",
+    "selected_devices": "",
+    "local_js": ["/js/global/globalNameSpace.js","/js/function/indexTableHandle.js", "/js/function/deviceSettingsTester.js", "/js/function/liveColorSetter.js"]
+}
