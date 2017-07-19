@@ -1,5 +1,5 @@
-const devicesTableBuilder = require("./showDevicesInTable.js");
-const valid_actions = ["set", "showintable", "network_addr", "port", "device", "test_conn"];
+var devicesTableBuilder = require("./showDevicesInTable.js");
+var valid_actions = ["set", "showintable", "network_addr", "port", "device", "test_conn"];
 //var request = require("request");
 var pageDataHelper = require("../views/pageDataBuilder.js");
 
@@ -50,13 +50,13 @@ function getDeviceQueryParameters(queryParameters) {
 
     return parameters;
 }
-
+////////// under construction ///////
 const colorFormat = RegExp("[a-z0-9A-Z]{5}");
 const colorNetworkFormat = RegExp("(^[a-zA-Z]+$)|(^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})");
 const colorPortFormat = RegExp("[a-z0-9A-Z]{5}");
 
 function delegateAction(controlParameters, request, response) {
-    console.log(request.query['test_conn'])
+    console.log(request.query['test_conn']);
     if (controlParameters.length === 1) {
         if (controlParameters[0] === 'set') {
             if (colorFormat.test(controlParameters[0].match)) {

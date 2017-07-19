@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
-var deviceQueryDelegator = require("./device_control/device_query_resolver.js");
-var indexPageBuilder = require("./index.js");
+var deviceQueryDelegator = require("./device_control/deviceQueryResolver.js");
+var indexPageBuilder = require("./views/indexPageBuilder.js");
 
 const indexPage = '/';
 const device = '/device/';
