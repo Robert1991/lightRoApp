@@ -1,2 +1,4 @@
 node_modules/
 app/old/
+nbproject/
+app/data/deviceDatabase.json
