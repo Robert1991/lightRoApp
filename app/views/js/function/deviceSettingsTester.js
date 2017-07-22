@@ -40,12 +40,9 @@ function submitSettings() {
         sendQuery(xhttp,testSettingsQuery);
         
         if (xhttp.status === 200) {
-            alert("Done");
-            alert(xhttp.responseText);
+            alert(xhttp.responseText);   
         }
     }
-    
-    alert("2");
     
     return false;
 }

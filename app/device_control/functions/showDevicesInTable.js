@@ -1,8 +1,8 @@
-var pageDataHelper = require("../views/pageDataBuilder.js");
-var dbHandle = require("../data/dbHandle.js");
+var pageDataHelper = require("../../views/pageDataBuilder.js");
+var dbHandle = require("../../data/dbHandle.js");
 
-exports.showDevicesInTable = function (request, response) {
-    var deviceList = getDevicesFromQuery(request.query['device']);
+exports.execute = function (query, response) {
+    var deviceList = getDevicesFromQuery(query['device']);
     displaySelectedDevices(response, deviceList);
 };
 

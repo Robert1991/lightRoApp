@@ -1,3 +1,5 @@
+/* global undefinded */
+
 function QueryResolver(mappingFile) {
     this.parameterKeys = Object.keys(mappingFile);
     this.mapping = mappingFile;
@@ -23,8 +25,7 @@ QueryResolver.prototype.lookUpParameterSet = function (queryParameters) {
             }
         }
 
-        return [];
-
+        return "undefinded";
 };
 
 module.exports = QueryResolver;

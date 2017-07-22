@@ -1,0 +1,5 @@
+{
+    "network_addr;port;test_conn": "./functions/testConnectionToDevice.js",
+    "device;showintable" : "./functions/showDevicesInTable.js",
+    "device;set_live_color" : "./functions/deviceLiveColorSetter.js"
+}
