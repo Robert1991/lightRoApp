@@ -1,48 +1,76 @@
-function submitSettings() {
-    var networkNameExp = /(^[a-zA-Z]+$)|(^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/;
-    var portExp = /^[0-9]{1,4}$/;
-    var queryFormat = "/device/?network_addr={network}&port={port}&test_conn=true";
-    
-    function checkDeviceNetworkName(deviceNetworkName) {
+function testDeviceSettings() {
+    const networkNameExp = /(^[a-zA-Z]+$)|(^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/;
+    const portExp = /^[0-9]{1,4}$/;
+    const queryFormat = "/device/?network_addr={network}&port={port}&test_conn=true";
+    var deviceNetworkName = "";
+    var devicePort = "";
+    var sendSettings = false;
+
+    function checkDeviceNetworkName() {
         return deviceNetworkName.match(networkNameExp);
     }
-    
-    function checkDevicePort(devicePort) {
+
+    function checkDevicePort() {
         return devicePort.match(portExp);
     }
-    
+
     function buildHttpRequestObject() {
         var xhttp = new XMLHttpRequest();
         return xhttp;
     }
-    
+
     function sendQuery(httpConnection, query) {
         httpConnection.open("GET", query, false);
         httpConnection.send();
     }
-    
-    function checkIfDevicesSettingsAreInValidFormat(deviceNetworkName,devicePort) {
+
+    function checkIfDevicesSettingsAreInValidFormat() {
         return checkDeviceNetworkName(deviceNetworkName) && checkDevicePort(devicePort);
     }
-    
-    function buildQuery(deviceNetworkAddress,devicePort) {
-        return queryFormat.format({network: deviceNetworkAddress, port: devicePort});
+
+    function buildQuery() {
+        return queryFormat.format({network: deviceNetworkName, port: devicePort});
     }
-    
-    var deviceNetworkName = document.getElementById("device_network_name_ip").value;
-    var devicePort = document.getElementById("device_port").value;
-    
-    var deviceValid = checkIfDevicesSettingsAreInValidFormat(deviceNetworkName,devicePort);
-    
-    if (deviceValid) {
-        var testSettingsQuery = buildQuery(deviceNetworkName,devicePort);
+
+    function setDeviceVariables() {
+        deviceNetworkName = document.getElementById("device_network_name_ip").value;
+        devicePort = document.getElementById("device_port").value;
+    }
+
+    function parseQueryResponse(httpConnection) {
+        if (httpConnection.status === 200) {
+            return eval("(" + httpConnection.responseText + ')');
+        } else {
+            alert("error");
+            return "undefined";
+        }
+    }
+
+    function sendSettingsToServer() {
+        var testSettingsQuery = buildQuery(deviceNetworkName, devicePort);
         var xhttp = buildHttpRequestObject();
-        sendQuery(xhttp,testSettingsQuery);
-        
-        if (xhttp.status === 200) {
-            alert(xhttp.responseText);   
+        sendQuery(xhttp, testSettingsQuery);
+        return parseQueryResponse(xhttp);
+    }
+
+    function processResponse(response) {
+        alert(response['status']);
+        if (response['status'] === 'OK') {
+            sendSettings = true;
+        } else {
+            alert(response['msg']);
         }
     }
     
-    return false;
+    // entry
+    setDeviceVariables();
+
+    if (checkIfDevicesSettingsAreInValidFormat()) {
+        var response = sendSettingsToServer();
+        if (response !== 'undefined') {
+            processResponse(response);
+        }
+    }
+
+    return sendSettings;
 }

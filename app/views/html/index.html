@@ -85,13 +85,13 @@
                         <h4><span class="glyphicon glyphicon-plus"></span>Add Device</h4>
                     </div>
                     <div id="testone" class="modal-body" style="padding:40px 50px;">
-                        <form id="addDeviceForm" class="form-horizontal" onsubmit="return submitSettings();">
+                        <form id="addDeviceForm" class="form-horizontal" action="./add/" onsubmit="return testDeviceSettings();">
                             <fieldset>
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="device_name">Device Name</label>  
                                     <div class="col-md-4">
-                                        <input id="device_name" name="device_name" type="text" placeholder="" class="form-control input-md" required="">
+                                        <input id="device_name" name="name" type="text" placeholder="" class="form-control input-md" required="">
 
                                     </div>
                                 </div>
@@ -100,16 +100,16 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="device_location">Device Location</label>  
                                     <div class="col-md-4">
-                                        <input id="device_location" name="device_location" type="text" placeholder="" class="form-control input-md">
+                                        <input id="device_location" name="location" type="text" placeholder="" class="form-control input-md">
 
                                     </div>
                                 </div>
                                 
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="device_network_name_ip">Network Name / IP</label>  
+                                    <label class="col-md-4 control-label" for="device_network_name">Network Name / IP</label>  
                                     <div class="col-md-4">
-                                        <input id="device_network_name_ip" name="device_network_name_ip" type="text" placeholder="" class="form-control input-md" required="">
+                                        <input id="device_network_name" name="network_name" type="text" placeholder="" class="form-control input-md" required="">
 
                                     </div>
                                 </div>
@@ -118,16 +118,16 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="device_port">Device Port</label>  
                                     <div class="col-md-4">
-                                        <input id="device_port" name="device_port" type="text" placeholder="3000" class="form-control input-md" required="">
+                                        <input id="device_port" name="port" type="text" placeholder="3000" class="form-control input-md" required="">
 
                                     </div>
                                 </div>
                                 
                                 <!-- Button -->
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="submitButton">Submit Settings</label>
+                                    <label class="col-md-4 control-label" for="addDeviceToDb">Submit Settings</label>
                                     <div class="col-md-4">
-                                        <button id="submitButton" name="submitButton" class="btn btn-primary" type = "submit">Submit Settings</button>
+                                        <button id="submitButton" name="addDeviceToDb" class="btn btn-primary" type = "submit">Submit Settings</button>
                                     </div>
                                 </div>
 

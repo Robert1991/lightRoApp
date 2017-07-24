@@ -1,10 +1,12 @@
 var express = require('express');
 var app = express();
 var deviceQueryDelegator = require("./device_control/deviceQueryResolver.js");
+var userDataControl = require("./user_data_control/userDataQueryResolver.js");
 var indexPageBuilder = require("./views/indexPageBuilder.js");
 
 const indexPage = '/';
 const device = '/device/';
+const add = '/add/';
 
 app.get(indexPage, function (req, res) {
     console.log(req.url);
@@ -14,6 +16,11 @@ app.get(indexPage, function (req, res) {
 app.get(device, function (req, res) {
     console.log(req.url);
     deviceQueryDelegator.delegate(req,res);
+});
+
+app.get(add, function (req, res) {
+    console.log(req.url);
+    userDataControl.delegate(req,res);
 });
 
 app.post('/', function (req, res) {

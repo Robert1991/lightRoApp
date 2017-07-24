@@ -1,0 +1,3 @@
+{
+    "name;location;network_name;port;addDeviceToDb" : "./functions/addNewDeviceToDatabase.js"
+}

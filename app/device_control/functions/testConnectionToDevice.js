@@ -9,5 +9,13 @@ const portFormatExpression = RegExp("[a-z0-9A-Z]{5}");
 
 exports.execute = function(query,response) {
     console.log(query);
-    response.send("OK");
+    
+    var foo = "0";
+    
+    if (foo === "0")
+        response.send("{status : \"OK\", msg : \"OKMessage\"}");
+    else
+        response.send("{status : \"NOK\", msg : \"NOKMessage\"}");
+    
+    
 };
