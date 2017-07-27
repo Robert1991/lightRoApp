@@ -6,6 +6,7 @@ var indexPageBuilder = require("./views/indexPageBuilder.js");
 
 const indexPage = '/';
 const device = '/device/';
+const user = '/user/';
 const add = '/add/';
 
 app.get(indexPage, function (req, res) {
@@ -22,6 +23,12 @@ app.get(add, function (req, res) {
     console.log(req.url);
     userDataControl.delegate(req,res);
 });
+
+app.get(user, function (req, res) {
+    console.log(req.url);
+    userDataControl.delegate(req,res);
+});
+
 
 app.post('/', function (req, res) {
     console.log(req.url);

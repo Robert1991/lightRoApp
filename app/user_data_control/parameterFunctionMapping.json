@@ -1,3 +1,4 @@
 {
-    "name;location;network_name;port;addDeviceToDb" : "./functions/addNewDeviceToDatabase.js"
+    "name;location;network_name;port;addDeviceToDb" : "./functions/addNewDeviceToDatabase.js",
+    "name;checkForName" : "./functions/checkForDeviceInDatabase.js"
 }

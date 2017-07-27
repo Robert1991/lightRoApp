@@ -5,7 +5,7 @@ var QueryResolver = require("../query_resolver/queryResolver.js");
 exports.delegate = function (request, response) {
     var queryParameters = Object.keys(request.query);
     var resultFunction = getFunctionFromParameters(queryParameters);
-    console.log(request.query);
+    console.log(resultFunction);
     executeResultFunction(resultFunction,request.query,response);
 };
 

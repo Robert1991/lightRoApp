@@ -25,7 +25,7 @@ QueryResolver.prototype.lookUpParameterSet = function (queryParameters) {
             }
         }
 
-        return "undefinded";
+        return "undefined";
 };
 
 module.exports = QueryResolver;

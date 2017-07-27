@@ -3,7 +3,6 @@
 var path = require('path');
 var jsonDB = require('node-json-db');
 var format = require('string-format');
-
 var deviceDb = new jsonDB(path.join(__dirname, '/deviceDatabase.json'), true, false);
 
 exports.getDeviceList = function() {
@@ -27,22 +26,12 @@ exports.getDeviceByName = function(name) {
     return getDeviceByName(name);
 };
 
-/////////////////////////////////
-// TODO Refactor own class
-// TODO Check if device is already in table 
-// TODO Check after connection status and build an dummy
-
-const default_color = "#cc66ff";
-var deviceInputFormat = "/{device_name}/{db_key}";
-
-exports.addDevice = function(deviceTable) {
-    var keys = Object.keys(deviceTable);
-    for(var i = 0; i < keys.length; i++) {
-        deviceDb.push(format(deviceInputFormat,{'device_name' : deviceTable['name'], 'db_key' : keys[i]}),deviceTable[keys[i]]);
+exports.checkIfDeviceExists = function(name) {
+    if(Object.keys(getDeviceByName(name)).length > 0) {
+        return true;
     }
-    setDefaultLiveColor(deviceTable['name']);
-    deviceDb.save();
-    return true;
+    
+    return false;
 };
 
 exports.getDevicesFromList = function(names) {
@@ -61,5 +50,24 @@ function setDefaultLiveColor(deviceName) {
 
 function getDeviceByName(name) {
     var device = deviceDb.getData("/" + name);
-    return device;
+    if (Object.keys(device).length > 0)
+        return device;
+    else
+        return "undefined";
 }
+
+/////////////////////////////////
+// TODO Refactor own class add device settings in dbhandle to
+
+const default_color = "#cc66ff";
+var deviceInputFormat = "/{device_name}/{db_key}";
+
+exports.addDevice = function(deviceTable) {
+    var keys = Object.keys(deviceTable);
+    for(var i = 0; i < keys.length; i++) {
+        deviceDb.push(format(deviceInputFormat,{'device_name' : deviceTable['name'], 'db_key' : keys[i]}),deviceTable[keys[i]]);
+    }
+    setDefaultLiveColor(deviceTable['name']);
+    deviceDb.save();
+    return true;
+};
