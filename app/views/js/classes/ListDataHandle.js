@@ -27,4 +27,26 @@ class ListDataHandle {
         
         return index;
     }
+    
+    static getListItems() {
+        var deviceList = document.getElementById("deviceListHead");
+        return deviceList.getElementsByTagName("li");
+    }
+    
+    static getDeviceNamesFromListItems() {
+        var items = this.getListItems();
+        var deviceNames = [];
+
+        for (var i = 0; i < items.length; ++i) {
+            var listItem = items[i];
+            var device = listItem.getElementsByTagName("input");
+
+            if (device[0].checked === true) {
+                var deviceName = listItem.getElementsByTagName("label");
+                deviceNames.push(deviceName[0].textContent);
+            }
+        }
+
+        return deviceNames;
+    }
 }

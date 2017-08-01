@@ -12,6 +12,16 @@ class TableDataHandle {
 
         return "undefined";
     }
+    
+    static getTableCellFromRow(tableRow, valueID) {
+        var columns = tableRow.getElementsByTagName("td");
+        for (var i = 0; i < columns.length; i++) {
+            if (columns[i].id === valueID) {
+                return columns[i];
+            }
+        }
+        return "undefined";
+    }
 
     static getRowIndexFromElement(element) {
         var parent = element.parentNode;
@@ -30,25 +40,23 @@ class TableDataHandle {
         document.getElementById("deviceSettingsTable").deleteRow(rowIndex);
     }
     
-    static getTableItems() {
-        var deviceList = document.getElementById("deviceListHead");
-        return deviceList.getElementsByTagName("li");
+    static getTableRowElements() {
+        return document.getElementById("deviceSettingsTable").rows;
     }
     
-    static getDeviceNamesFromTableItems() {
-        var items = this.getTableItems();
-        var deviceNames = [];
-
-        for (var i = 0; i < items.length; ++i) {
-            var listItem = items[i];
-            var device = listItem.getElementsByTagName("input");
-
-            if (device[0].checked === true) {
-                var deviceName = listItem.getElementsByTagName("label");
-                deviceNames.push(deviceName[0].textContent);
-            }
+    static getTableRowIds() {
+        var ids = [];
+        var tableRows = this.getTableRowElements();
+        
+        for (var i = 0; i < tableRows.length; i++) {
+            if (tableRows[i].id.length > 0)
+                ids.push(tableRows[i].id);
         }
-
-        return deviceNames;
+        
+        return ids;
+    }
+    
+    static registerEventHandlerForElement(element,event,handler) {
+        element.addEventListener(event, handler);
     }
 }

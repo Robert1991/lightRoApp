@@ -7,7 +7,7 @@ const colorRectangle = "<td id=\"color\"><div id=\"rectangle\" class=\"well well
 const changeButton = "<td id=\"{button_id}\"><button type=\"button\" class=\"btn btn-default\"  onclick=\"{function}\"> {icon}</button></td>";
 const gylphiconSpan = "<span class=\"glyphicon glyphicon-{type}\"></span>";
 const glyphiconIconDelete = "trash";
-const functionDelete = "deleteDeviceFromDb(this)";
+const functionDelete = "deleteDeviceFromDb";
 const functionChangeDeviceSettings = "changeDeviceSettings()";
 const glyphiconIconOk = "ok";
 const glyphiconIconNOk = "remove";
