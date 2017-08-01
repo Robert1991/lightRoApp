@@ -7,6 +7,5 @@
         "https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"],
     "heading": "LightRoApp",
     "devices": "",
-    "selected_devices": "",
-    "local_js": ["/js/global/globalNameSpace.js","/js/function/indexTableHandle.js", "/js/function/deviceSettingsTester.js", "/js/function/liveColorSetter.js"]
+    "selected_devices": ""
 }

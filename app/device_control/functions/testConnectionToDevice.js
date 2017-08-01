@@ -12,10 +12,23 @@ const portFormatExpression = RegExp("[a-z0-9A-Z]{5}");
 exports.execute = function (query, response) {
     var foo = "0";
     
-    if (foo === "0") {
+    if (checkConnectionToRequestedDevice(query['network_addr'],query['port'])) {
         response.send(format(responseFormat, {'status': 'OK', 'msg': 'OkMeessage'}));
     } else {
         response.send(format(responseFormat, {'status': 'NOK', 'msg': 'NOkMeessage'}));
     }
-
 };
+
+exports.checkConnectionToDevice = function(networkNameIp,Port) {
+    return checkConnectionToRequestedDevice(networkNameIp,Port);
+};
+
+function checkConnectionToRequestedDevice(networkNameIp,Port) {
+    var sendRequestToDeviceAndGetAnswer = true;
+    
+    if (sendRequestToDeviceAndGetAnswer) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -8,7 +8,6 @@
             {{#each stylesheet}}
             <link rel="stylesheet" href="{{{this}}}"/>
         <link rel="stylesheet" href="../../../node_modules/html-template/node_modules/hyperglue/node_modules/domify/components/visionmedia-mocha/mocha.css" type="text/css">
-
         {{/each}}
         {{#each jsspripts}}
         <script type='text/javascript' src="{{{this}}}"></script>
@@ -21,22 +20,19 @@
                 <div class="panel-heading"><h1>{{{heading}}}</h1></div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Configure Devices
                                     <span class="caret"></span></button>
-                                <ul id="deviceListHead" onchange="refreshTable()" class="dropdown-menu">
-                                    {{{device_list devices}}}
+                                <ul id="deviceListHead" class="dropdown-menu">
+                                    {{{device_list devices selected_devices}}}
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Manage Devices
-                                    <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a data-toggle="modal" href="#add_device_modal">Add Device</a></li>
-                                </ul>
+                        <div class="col-md-6">
+                            <div class="dropdown pull-right">
+                                <button type="button" class="btn btn-default" data-toggle="modal" href="#add_device_modal"> <span class="glyphicon glyphicon-plus"></span></button>
+
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -46,7 +42,7 @@
 
         <div class="container-fluid">
             <h2>Device Name</h2>
-            <table class="table table-striped">
+            <table id="deviceSettingsTable" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -84,9 +80,9 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4><span class="glyphicon glyphicon-plus"></span>Add Device</h4>
                     </div>
-                    <div id="testone" class="modal-body" style="padding:40px 50px;">
-                        <form id="addDeviceForm" class="form-horizontal" action="./add/" onsubmit="return testDeviceSettings();">
-                            <fieldset>
+                    <div id="addDeviceFormModalBody" class="modal-body" style="padding:40px 50px;">
+                        <fieldset>
+                            <form id="addDeviceForm" class="form-horizontal" action="./add/">
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="device_name">Device Name</label>  
@@ -104,7 +100,7 @@
 
                                     </div>
                                 </div>
-                                
+
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="device_network_name">Network Name / IP</label>  
@@ -122,22 +118,21 @@
 
                                     </div>
                                 </div>
-                                
-                                <!-- Button -->
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="addDeviceToDb">Submit Settings</label>
-                                    <div class="col-md-4">
-                                        <button id="submitButton" name="addDeviceToDb" class="btn btn-primary" type = "submit">Submit Settings</button>
-                                    </div>
-                                </div>
 
 
-                            </fieldset>
-                        </form>
+                            </form>
+
+                            <!-- Button -->
+                            <label class="col-md-4 control-label" for="addDeviceToDb"></label>
+                            <div class="col-md-4">
+                                <button id="submitButton" name="addDeviceToDb" class="btn btn-primary">Submit Settings</button>
+                            </div>
+
+                        </fieldset>
                     </div>
 
                 </div> 
             </div>
-            {{{local_script_import local_js}}}
+            {{{local_script_import}}}
     </body>
 </html>

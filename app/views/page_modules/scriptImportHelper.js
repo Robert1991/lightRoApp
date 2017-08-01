@@ -1,19 +1,22 @@
 /* global __dirname */
-const handlebars = require('handlebars');
-const fs = require('fs');
-const format = require('string-format');
-// matches at least one blank 
-const blankExp = /\ +/g;
-// Comments,Tab,Newline
-const filteredPatternsWithoutReplacement = [/.*\/{2,}.*[\n{1}]|^/g,/\t/g,/\n/g];
 const scriptFormat = "<script>{scriptContent}</script>";
+const scriptDir = __dirname + "/../js";
+
+
+var handlebars = require('handlebars');
+var format = require('string-format');
+var dirHandle = require('../../util/DirHandle');
+var fileHandle = require('../../util/FileHandle');
+var ContentCompressor = require(__dirname + '/util/StringContentCompressor');
 
 exports.registerHelper = function () {
-    handlebars.registerHelper('local_script_import', function (local_js) {
+    handlebars.registerHelper('local_script_import', function () {
         var scripts = "";
-
-        for (i = 0; i < local_js.length; i++) {
-            scripts += getScriptContentFromSourceFile(local_js[i]);
+        var dirContent = [];
+        dirContent = dirHandle.readDirContentSyncRecursive(scriptDir);
+        
+        for (i = 0; i < dirContent.length; i++) {
+            scripts += getScriptContentFromSourceFile(dirContent[i]);
         }
 
         return format(scriptFormat, {'scriptContent': scripts});
@@ -21,19 +24,7 @@ exports.registerHelper = function () {
 };
 
 function getScriptContentFromSourceFile(scriptLocation) {
-    var scriptContent = fs.readFileSync(__dirname + "/../" + scriptLocation, {encoding: 'utf8'});
-    return compressScriptContent(scriptContent);
+    var scriptContent = fileHandle.readFileSync(scriptLocation);
+    return ContentCompressor.compressStringContent(" " + scriptContent + " ");
 }
 
-function compressScriptContent(scriptContent) {
-    var compressed = scriptContent;
-    for (var i = 0; i < filteredPatternsWithoutReplacement.length; i++) {
-        compressed = filterPattern(compressed,filteredPatternsWithoutReplacement[i],"");
-    }
-    compressed = filterPattern(compressed,blankExp," ");
-    return compressed;
-}
-
-function filterPattern(content,pattern,replacement) {
-    return content.replace(pattern,replacement);
-}

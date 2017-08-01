@@ -56,6 +56,31 @@ function getDeviceByName(name) {
         return "undefined";
 }
 
+exports.getDeviceByNetworkNameAndPort = function(networkName,port) {
+    return getDeviceByNetworkNameAndPortInternal(networkName,port);
+};
+
+exports.checkIfNetworkAddressExists = function(networkName,port) {
+    if (getDeviceByNetworkNameAndPortInternal(networkName,port) !== "undefined") {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+function getDeviceByNetworkNameAndPortInternal(networkName,port) {
+    var devices = deviceDb.getData("/");
+    var deviceKeys = Object.keys(devices);
+    
+    for (var i = 0; i < deviceKeys.length; i++) {
+        if (devices[deviceKeys[i]]['network_name'] === networkName && port === devices[deviceKeys[i]]['port']) {                
+            return devices[i];
+        }
+    }
+    
+    return "undefined";
+}
+
 /////////////////////////////////
 // TODO Refactor own class add device settings in dbhandle to
 
@@ -70,4 +95,9 @@ exports.addDevice = function(deviceTable) {
     setDefaultLiveColor(deviceTable['name']);
     deviceDb.save();
     return true;
+};
+
+exports.deleteDevice = function(name) {
+    deviceDb.delete("/" + name);
+    deviceDb.save();
 };
