@@ -20,8 +20,8 @@ const connectionStatus = 'connection_status';
 exports.registerHelper = function () {
     handlebars.registerHelper('device_info_table', function (selected_devices) {
         var tableRows = "";
-
         for (var i = 0; i < selected_devices.length; i++) {
+            
             tableRows += buildTableRow(selected_devices[i],i);
         }
 

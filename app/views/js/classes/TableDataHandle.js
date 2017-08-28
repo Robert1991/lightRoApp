@@ -38,6 +38,15 @@ class TableDataHandle {
     
     static deleteTableRowFromIndex(rowIndex) {
         document.getElementById("deviceSettingsTable").deleteRow(rowIndex);
+        this.reIndexTable();
+    }
+    
+    static reIndexTable() {
+        var tableRows = this.getTableRowElements();
+        
+        for (var i = 0; i < tableRows.length; i++) {
+            tableRows[i].id = "table_row_" + (i + 1);
+        }
     }
     
     static getTableRowElements() {

@@ -1,5 +1,5 @@
 var pageDataHelper = require("../views/pageDataBuilder.js");
-const parameterFunctionMapping = require("./parameterFunctionMapping.json");
+var parameterFunctionMapping = require("./parameterFunctionMapping.json");
 var QueryResolver = require("../query_resolver/queryResolver.js");
 
 exports.delegate = function (request, response) {

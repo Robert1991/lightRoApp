@@ -7,9 +7,10 @@ var deviceDb = new jsonDB(path.join(__dirname, '/deviceDatabase.json'), true, fa
 
 exports.getDeviceList = function() {
     var devices = deviceDb.getData("/");
+    
     var deviceKeys = Object.keys(devices);
     
-    if (deviceKeys < 0) {
+    if (deviceKeys.length < 0) {
         return [];
     } else {
         var deviceArray = [];
@@ -38,8 +39,14 @@ exports.getDevicesFromList = function(names) {
     var deviceList = [];
     
     for (var i = 0; i < names.length; i++) {
-        deviceList.push(getDeviceByName(names[i]));
+        var deviceName = getDeviceByName(names[i]);
+        console.log(deviceName.length);
+        if (deviceName !== 'undefined') {
+            deviceList.push(getDeviceByName(names[i]));
+        }
+        
     }    
+    
     
     return deviceList;
 };

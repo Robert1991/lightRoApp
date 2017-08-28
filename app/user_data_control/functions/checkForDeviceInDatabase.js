@@ -1,16 +1,12 @@
 const queryKey = "addDeviceToDb";
 var dbHandle = require("../../data/dbHandle.js");
-var format = require('string-format');
-const responseFormat = "{{status : \"{status}\", msg : \"{msg}\"}}";
+const responseFormatter = require('../../query_resolver/ResponseFormatter.js');
 
 exports.execute = function (query, response) {
-    var nameExists = false;
-    var networkAddrExists = false;
-    
-    nameExists = checkDeviceName(query['name']);
-    networkAddrExists = checkIfNetWorkAddressExists(query['network_addr'], query['port']);
-
-    response.send(format(responseFormat, {'status': 'OK', 'msg': "" + nameExists && networkAddrExists}));
+    var nameExists = checkDeviceName(query['name']);
+    var networkAddrExists = checkIfNetWorkAddressExists(query['network_addr'], query['port']);
+    var responseMessage = responseFormatter.formatSimpleResponse('OK',nameExists && networkAddrExists);
+    response.send(responseMessage);
 };
 
 function checkIfNetWorkAddressExists(networkName, port) {

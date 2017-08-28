@@ -16,9 +16,7 @@ var dbHandle = require("../data/dbHandle.js");
 
 exports.buildIndexPage = function (response, selectedDevices) {
     fs.readFile(indexLocation, 'utf8', function (err, source) {
-        handleError(err);
-        selectedDevices = checkConnectionStatusForDevices(selectedDevices);
-        assignDataToIndexPage(selectedDevices);
+        assignDataToIndexPage(checkConnectionStatusForDevices(selectedDevices));
         registerHelperForIndexPage();
         response.send(compilePage(source, indexPageData));
     });
@@ -27,7 +25,7 @@ exports.buildIndexPage = function (response, selectedDevices) {
 exports.buildPageTable = function (response, selectedDevices) {
     var tableData = "";
     for (var i = 0; i < selectedDevices.length; i++) {
-        tableData += tableDataBuilder.buildTableRow(selectedDevices[i],i);
+        tableData += tableDataBuilder.buildTableRow(selectedDevices[i], i);
     }
     response.send(tableData);
 };
@@ -42,19 +40,18 @@ function assignDataToIndexPage(selectedDevices) {
 }
 
 function checkConnectionStatusForDevices(selectedDevices) {
+    var devices = [];
     for (var i = 0; i < selectedDevices.length; i++) {
         var selectedDevice = selectedDevices[i];
-        var available = deviceConnectionChecker.checkConnectionToDevice(selectedDevice['network_name'],selectedDevice['port']);
-        
+        var available = deviceConnectionChecker.checkConnectionToDevice(selectedDevice['network_name'], selectedDevice['port']);
+
         if (available)
             selectedDevice.connection_status = "OK";
         else
             selectedDevice.connection_status = "NOK";
-        
+
         selectedDevices[i] = selectedDevice;
     }
-    
-    console.log(selectedDevices);
     return selectedDevices;
 }
 

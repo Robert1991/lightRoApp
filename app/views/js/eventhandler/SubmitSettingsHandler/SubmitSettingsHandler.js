@@ -68,4 +68,6 @@ function submitSettingsEventHandler() {
     if (sendSettings) {
         document.getElementById("addDeviceForm").submit();
     }
+    
+    
 }

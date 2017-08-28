@@ -1,10 +1,10 @@
 var dbHandle = require("../data/dbHandle.js");
 var pageDataHelper = require("./pageDataBuilder.js");
 
-exports.showIndexPage = function(request,response) {
+exports.showIndexPage = function (request, response) {
     if (checkUrlIsValid(request.url)) {
-        var allDevices = dbHandle.getDeviceList();
-        buildIndexPage(response,[allDevices[0]]);
+        var allDevices = getDeviceList();
+        buildIndexPage(response, [allDevices[0]]);
     } else {
         pageDataHelper.send404(response);
     }
@@ -18,6 +18,19 @@ function checkUrlIsValid(url) {
     }
 }
 
-function buildIndexPage(response,selectedDevices) {
-    pageDataHelper.buildIndexPage(response,selectedDevices);
+function buildIndexPage(response, selectedDevices) {
+    pageDataHelper.buildIndexPage(response, selectedDevices);
+}
+
+function getDeviceList() {
+    try {
+        var deviceList =  dbHandle.getDeviceList();
+        
+        if (typeof deviceList !== "undefined" && deviceList)
+            return deviceList;
+        else 
+            return [];
+    } catch (err) {
+        return [];
+    }
 }
